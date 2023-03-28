@@ -13,6 +13,7 @@ import Container from "@mui/material/Container";
 
 import { useState } from "react";
 import { IconButton, InputAdornment } from "../InputAdornment.styled";
+import { CardMedia } from "@mui/material";
 
 // import { useDispatch } from "react-redux";
 // import { authOperations } from "redux/auth";
@@ -64,15 +65,7 @@ export default function SignIn() {
         <Typography component="h5" variant="h6">
           Welcome back! We're excited to see you here. Please log in to get started.
         </Typography>
-        <Box
-          component="img"
-          sx={{
-            height: 250,
-            width: 250,
-          }}
-          alt="Log In image."
-          src="../../images/ErrorDog.jpg"
-        />
+        <CardMedia component="img" width="250" height="250" alt="Log In image." src="../../images/ErrorDog.jpg" />
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField
             margin="normal"
