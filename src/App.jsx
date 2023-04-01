@@ -1,10 +1,10 @@
 import "./App.css";
-import SignIn from "./components/SignIn/SignIn";
+import UserRoutes from "./UserRoutes";
 
 function App() {
   return (
     <>
-      <SignIn />
+      <UserRoutes />
     </>
   );
 }

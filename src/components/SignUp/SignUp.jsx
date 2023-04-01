@@ -13,7 +13,7 @@ const initialState = {
   showPassword: false,
 };
 
-export default function SignIn() {
+export default function SignUp() {
   const [values, setValues] = useState(initialState);
 
   const handleChange = (prop) => (event) => {
@@ -52,11 +52,9 @@ export default function SignIn() {
         }}
       >
         <Typography component="h1" variant="h5" sx={{ fontWeight: 700 }}>
-          Welcome Back
+          Sign Up
         </Typography>
-        <Typography component="span" sx={{ textAlign: "center" }}>
-          Welcome back! We're excited to see you here. Please log in to get started.
-        </Typography>
+
         <CardMedia
           component="img"
           sx={{ mt: 2.5, height: 250, width: 250 }}
@@ -65,6 +63,19 @@ export default function SignIn() {
         />
         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 2.5 }}>
           <Divider />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="name"
+            label="Name"
+            placeholder="Input your name"
+            name="name"
+            autoComplete="name"
+            onChange={handleChange("name")}
+            value={values.name}
+            sx={{ backgroundColor: "#FAFAFC" }}
+          />
           <TextField
             margin="normal"
             required
@@ -106,12 +117,12 @@ export default function SignIn() {
           />
 
           <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2, backgroundColor: "#28293D" }}>
-            Log In
+            Sign Up
           </Button>
           <Grid container sx={{ justifyContent: "center" }}>
             <Grid item>
-              <Link href="#" variant="body2">
-                {"Forgot?"}
+              <Link href="/login" variant="body2">
+                {"Have an account?"}
               </Link>
             </Grid>
           </Grid>
@@ -120,10 +131,3 @@ export default function SignIn() {
     </Container>
   );
 }
-
-// SignIn.propType = {
-//   handleSubmit: PropTypes.func.required,
-//   handleChange: PropTypes.func.required,
-//   email: PropTypes.string.required,
-//   password: PropTypes.string.required,
-// };
