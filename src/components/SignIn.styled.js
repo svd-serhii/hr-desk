@@ -2,10 +2,12 @@ import ButtonUnstyled from "@mui/base/ButtonUnstyled";
 import styled from "@emotion/styled";
 
 export const InputAdornment = styled("div")`
-  margin: 8px;
+  // margin: 8px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  width: 40px;
+  height: 40px;
 `;
 
 export const IconButton = styled(ButtonUnstyled)`

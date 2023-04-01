@@ -1,20 +1,9 @@
+import { Box, Button, CardMedia, Container, Divider, Grid, Link, TextField, Typography } from "@mui/material";
 import * as React from "react";
-import styles from "./singin.module.css";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
+import { IconButton, InputAdornment } from "../SignIn.styled";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 import { useState } from "react";
-import { IconButton, InputAdornment } from "../InputAdornment.styled";
-import { CardMedia } from "@mui/material";
-
 // import { useDispatch } from "react-redux";
 // import { authOperations } from "redux/auth";
 
@@ -48,25 +37,34 @@ export default function SignIn() {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
+    <Container sx={{ justifyContent: "center", alignItems: "center", display: "flex" }}>
       <Box
-        className={styles.formContainer}
+        maxWidth={400}
+        maxHeight={735}
         sx={{
-          marginTop: 8,
+          px: 2.5,
+          py: 4,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
+          borderRadius: 8,
+          boxShadow: 1,
         }}
       >
-        <Typography component="h1" variant="h4" className={styles.title}>
+        <Typography component="h1" variant="h5" sx={{ fontWeight: 700 }}>
           Welcome Back
         </Typography>
-        <Typography component="h5" variant="h6">
+        <Typography component="span" sx={{ textAlign: "center" }}>
           Welcome back! We're excited to see you here. Please log in to get started.
         </Typography>
-        <CardMedia component="img" width="250" height="250" alt="Log In image." src="../../images/ErrorDog.jpg" />
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+        <CardMedia
+          component="img"
+          sx={{ mt: 2.5, height: 250, width: 250 }}
+          title="Log In image."
+          image="/src/images/Illustrations.jpg"
+        />
+        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 2.5 }}>
+          <Divider />
           <TextField
             margin="normal"
             required
@@ -78,6 +76,7 @@ export default function SignIn() {
             autoComplete="email"
             onChange={handleChange("email")}
             value={values.email}
+            sx={{ backgroundColor: "#FAFAFC" }}
           />
           <TextField
             margin="normal"
@@ -90,6 +89,7 @@ export default function SignIn() {
             autoComplete="current-password"
             onChange={handleChange("password")}
             value={values.password}
+            sx={{ backgroundColor: "#FAFAFC" }}
             InputProps={{
               endAdornment: (
                 <InputAdornment>
