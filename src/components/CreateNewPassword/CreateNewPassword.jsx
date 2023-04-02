@@ -6,10 +6,10 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { updatePassword } from "firebase/auth";
-import { auth } from "../../firebase";
-import { setUser } from "../../store/slice/userSlice";
-import { toast } from "react-toastify";
+// import { updatePassword } from "firebase/auth";
+// import { auth } from "../../firebase";
+// import { setUser } from "../../store/slice/userSlice";
+// import { toast } from "react-toastify";
 import { Loader } from "../Loader/Loader";
 
 export default function CreateNewPassword() {
@@ -34,7 +34,7 @@ export default function CreateNewPassword() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    setLoading(true);
+    navigate("/login");
 
     // const user = auth.currentUser;
     // const newPassword = password;
