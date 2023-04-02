@@ -1,6 +1,9 @@
 import React from "react";
 import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
+import { PublicRoute } from "./components/PublicRoute/PublicRoute";
+import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute";
+import { Loader } from "./components/Loader/Loader";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
 const LoginPage = lazy(() => import("./pages/LoginPage"));
@@ -11,16 +14,16 @@ const RegisterPage = lazy(() => import("./pages/RegisterPage"));
 
 const UserRoutes = () => {
   return (
-    <Suspense fallback={null}>
+    <Suspense fallback={<Loader />}>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route>
+        <Route element={<PublicRoute />}>
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/restore" element={<RestorePassword />} />
           <Route path="/new-pass" element={<CreateNewPassword />} />
         </Route>
-        <Route>
+        <Route element={<PrivateRoute />}>
           <Route path="/hr" element={<HumanResources />} />
         </Route>
       </Routes>
