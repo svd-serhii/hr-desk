@@ -1,35 +1,82 @@
 import { Box, Button, CardMedia, Container, Divider, Grid, Link, TextField, Typography } from "@mui/material";
 import * as React from "react";
-import { IconButton, InputAdornment } from "../SignIn.styled";
+import { IconButton, InputAdornment } from "./LogIn.styled";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 import { useState } from "react";
-// import { useDispatch } from "react-redux";
-// import { authOperations } from "redux/auth";
-
-const initialState = {
-  email: "",
-  password: "",
-  showPassword: false,
-};
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase";
+import { setUser } from "../../store/slice/userSlice";
+import { toast } from "react-toastify";
 
 export default function LogIn() {
-  const [values, setValues] = useState(initialState);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
+  const handleChange = ({ target: { name, value } }) => {
+    switch (name) {
+      case "email":
+        return setEmail(value);
+      case "password":
+        return setPassword(value);
+      default:
+        return;
+    }
   };
 
-  const handleSubmit = (event) => {
+  // const handleLogin = (email, password) => {
+  //   const auth = getAuth();
+  //   signInWithEmailAndPassword(auth, email, password)
+  //     .then(({ user }) => {
+  //       console.log(user);
+  //       dispatch(
+  //         setUser({
+  //           email: user.email,
+  //           id: user.uid,
+  //           token: user.accessToken,
+  //         })
+  //       );
+  //       navigate("/hr");
+  //     })
+  //     .catch((error) => {
+  //       console.log(`${error.message}`);
+  //     });
+  // };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    setValues(initialState);
+    setLoading(true);
+    try {
+      const userCredentials = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredentials.user;
+      dispatch(
+        setUser({
+          email: user.email,
+          id: user.uid,
+          token: user.accessToken,
+        })
+      );
+      console.log(user);
+      setLoading(false);
+      toast.success("You are login");
+      navigate("/hr");
+    } catch (error) {
+      toast.error("something went wrong");
+    }
+
+    setEmail("");
+    setPassword("");
+    setShowPassword(false);
   };
 
   const handleClickShowPassword = () => {
-    setValues({
-      ...values,
-      showPassword: !values.showPassword,
-    });
+    setShowPassword(!showPassword);
   };
 
   const handleMouseDownPassword = (event) => {
@@ -74,8 +121,8 @@ export default function LogIn() {
             placeholder="yourname@movadex.com"
             name="email"
             autoComplete="email"
-            onChange={handleChange("email")}
-            value={values.email}
+            onChange={handleChange}
+            value={email}
             sx={{ backgroundColor: "#FAFAFC" }}
           />
           <TextField
@@ -84,11 +131,11 @@ export default function LogIn() {
             fullWidth
             name="password"
             label="Password"
-            type={values.showPassword ? "text" : "password"}
+            type={showPassword ? "text" : "password"}
             id="password"
             autoComplete="current-password"
-            onChange={handleChange("password")}
-            value={values.password}
+            onChange={handleChange}
+            value={password}
             sx={{ backgroundColor: "#FAFAFC" }}
             InputProps={{
               endAdornment: (
@@ -98,7 +145,7 @@ export default function LogIn() {
                     onClick={handleClickShowPassword}
                     onMouseDown={handleMouseDownPassword}
                   >
-                    {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
                   </IconButton>
                 </InputAdornment>
               ),
@@ -125,10 +172,3 @@ export default function LogIn() {
     </Container>
   );
 }
-
-// SignIn.propType = {
-//   handleSubmit: PropTypes.func.required,
-//   handleChange: PropTypes.func.required,
-//   email: PropTypes.string.required,
-//   password: PropTypes.string.required,
-// };
