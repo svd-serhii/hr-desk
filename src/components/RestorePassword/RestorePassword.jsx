@@ -1,12 +1,12 @@
-import { Box, Button, CardMedia, Container, Divider, Grid, Link, TextField, Typography } from "@mui/material";
+import { Box, Container, Divider, Grid, Link, TextField, Typography } from "@mui/material";
 import * as React from "react";
 
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../../firebase";
-import { setUser } from "../../store/slice/userSlice";
+// import { setUser } from "../../store/slice/userSlice";
 import { toast } from "react-toastify";
 import { ButtonCustom } from "../LogIn/LogIn.styled";
 import { Loader } from "../Loader/Loader";
@@ -33,8 +33,6 @@ export default function RestorePassword() {
       navigate("/new-pass");
       const userCredentials = await sendPasswordResetEmail(auth, email);
       const user = userCredentials.user;
-      // console.log(user);
-
       toast.success("Password reset email sent!");
 
       setLoading(false);

@@ -1,10 +1,12 @@
-import { Box, Button, Container } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import React from "react";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { ButtonCustom } from "../LogIn/LogIn.styled";
+
+//TODO = add layout markup to the page
 
 const HumanResources = () => {
   const navigate = useNavigate();

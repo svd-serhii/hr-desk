@@ -36,17 +36,7 @@ export default function CreateNewPassword() {
 
     navigate("/login");
 
-    // const user = auth.currentUser;
-    // const newPassword = password;
-    // await updatePassword(user, newPassword)
-    //   .then(() => {
-    //     toast.success("Update successful");
-    //     navigate("/login");
-    //     setLoading(false);
-    //   })
-    //   .catch(() => {
-    //     toast.error("An error ocurred");
-    //   });
+    // TODO == add reset password code
   };
 
   const handleClickShowPassword = () => {
